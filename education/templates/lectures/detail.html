@@ -1,0 +1,25 @@
+{% extends "lectures/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+	<title>{{ lecture.name }}</title>
+	<link rel="stylesheet" href="{% static 'css/courses/detail.css' %}">
+</head>
+<table style="width:100%">
+	<tr>
+		<th>Lecture ID</th>
+		<th>Name</th>
+		<th>Week</th>
+		<th>Course</th>
+		<th>URL</th>
+	</tr>
+	<tr>
+		<th>{{ lecture.lecture_id }}</th>
+		<th>{{ lecture.name }}</th>
+		<th>{{ lecture.week }}</th>
+		<th>{{ lecture.course }}</th>
+		<th>{{ lecture.url }}</th>
+	</tr>
+</table>
+
+{% endblock %}

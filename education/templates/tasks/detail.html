@@ -1,0 +1,25 @@
+{% extends "tasks/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+	<title>{{ task.name }}</title>
+	<link rel="stylesheet" href="{% static 'css/courses/detail.css' %}">
+</head>
+<table style="width:100%">
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Due Date</th>
+		<th>Course</th>
+		<th>Lecture</th>
+	</tr>
+	<tr>
+		<th>{{ task.name }}</th>
+		<th>{{ task.description }}</th>
+		<th>{{ task.due_date }}</th>
+		<th>{{ task.course.name }}</th>
+		<th>{{ task.lecture.name }}</th>
+	</tr>
+</table>
+
+{% endblock %}

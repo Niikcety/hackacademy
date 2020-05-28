@@ -1,0 +1,23 @@
+{% extends "courses/base.html" %} 
+{% load static %}
+{% block content %}
+<head>
+	<title>{{ course.name }}</title>
+	<link rel="stylesheet" href="{% static 'css/courses/detail.css' %}">
+</head>
+<table style="width:100%">
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Start date</th>
+		<th>End date</th>
+	</tr>
+	<tr>
+		<th>{{ course.name }}</th>
+		<th>{{ course.description }}</th>
+		<th>{{ course.start_date }}</th>
+		<th>{{ course.end_date }}</th>
+	</tr>
+</table>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "courses/base.html" %}
+{% load static %}
+{% block content %}
+<a href="{% url 'education:courses:create' %}">Add new</a>
+<head>
+	<title>Courses</title>
+	<link rel="stylesheet" href="{% static 'css/courses/detail.css' %}">
+</head>
+{% if courses %}
+<table style="width:100%">
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Start date</th>
+		<th>End date</th>
+	</tr>
+  {% for course in courses %}
+  <tr>
+		<th><a href="{% url 'education:courses:detail' course.id%}">{{ course.name }}</a></th>
+		<th>{{ course.description }}</th>
+		<th>{{ course.start_date }}</th>
+		<th>{{ course.end_date }}</th>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p><strong>No courses yet.</strong></p>
+{% endif %} {% endblock %}

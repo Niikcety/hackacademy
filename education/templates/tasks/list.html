@@ -1,0 +1,34 @@
+{% extends "tasks/base.html" %}
+{% load static %}
+{% block content %}
+<a href="{% url 'education:tasks:create' %}">Add new task</a>
+<head>
+	<title>Tasks</title>
+	<link rel="stylesheet" href="{% static 'css/courses/detail.css' %}">
+</head>
+{% if tasks %}
+<table style="width:100%">
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Due Date</th>
+		<th>Course</th>
+		<th>Lecture</th>
+	</tr>
+	{% for task in tasks %}
+	<tr>
+		<th>{{ task.name }}</th>
+		<th>{{ task.description }}</th>
+		<th>{{ task.due_date }}</th>
+		<th><a href="{% url 'education:courses:detail' task.course.id %}">{{ task.course.name }}</a></th>
+		{% if task.lecture.name %}
+		<th><a href="{% url 'education:lectures:detail' task.lecture.lecture_id %}">{{ task.lecture.name }}</a></th>
+		{% else %}
+		<th>This task is not associated with lecture</th>
+		{% endif %}
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
+<p><strong>No tasks yet.</strong></p>
+{% endif %} {% endblock %}

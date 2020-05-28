@@ -1,0 +1,30 @@
+{% extends "lectures/base.html" %}
+{% load static %}
+{% block content %}
+<a href="{% url 'education:lectures:create' %}">Add new lecture</a>
+<head>
+	<title>Lectures</title>
+	<link rel="stylesheet" href="{% static 'css/courses/detail.css' %}">
+</head>
+{% if lectures %}
+<table style="width:100%">
+	<tr>
+		<th>Lecture ID</th>
+		<th>Name</th>
+		<th>Week</th>
+		<th>Course</th>
+		<th>URL</th>
+	</tr>
+	{% for lecture in lectures %}
+	<tr>
+		<th>{{ lecture.lecture_id }}</th>
+		<th><a href="{% url 'education:lectures:detail' lecture.lecture_id%}">{{ lecture.name }}</a></th>
+		<th>{{ lecture.week }}</th>
+		<th><a href="{% url 'education:courses:detail' lecture.course.id%}">{{ lecture.course.name }}</a></th>
+		<th>{{ lecture.url }}</th>
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
+<p><strong>No lectures yet.</strong></p>
+{% endif %} {% endblock %}
