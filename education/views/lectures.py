@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 
-from education.models import Lecture
+from education.models import Lecture, Task
 
 
 def list(request):
@@ -11,7 +11,8 @@ def list(request):
 
 def detail(request, lecture_id):
     lecture = get_object_or_404(Lecture, lecture_id=lecture_id)
-    return render(request, 'lectures/detail.html', {'lecture': lecture})
+    return render(request, 'lectures/detail.html', {'lecture': lecture,
+                                                    'tasks': Task.objects.filter(lecture__name=lecture.name)})
 
 
 class LectureCreateView(CreateView):

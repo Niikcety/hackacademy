@@ -21,5 +21,26 @@
 		<th>{{ lecture.url }}</th>
 	</tr>
 </table>
+<h2 style="margin-top:100px; text-align: center">Tasks related to {{ lecture.name }}</h2>
+<table style="width:100%">
+	{% if tasks %}
+	{% for task in tasks %}
+	<tr>
+		<th>Task name</th>
+		<th>Task Description</th>
+		<th>Task Due Date</th>
+	<tr>
+		{% if task.lecture.name == lecture.name %}
+		<th><a href="{% url 'education:tasks:detail' task.id %}">{{ task.name }}</th>
+		<th>{{ task.description }}</th>
+		<th>{{ task.due_date }}</th>
+		{% endif %}
+	</tr>
+	{% endfor %}
+	{% else %}
+	<h2>There are still no tasks associated with this lecture.</h2>
+	{% endif %}
+
+</table>
 
 {% endblock %}
