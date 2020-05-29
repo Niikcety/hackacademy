@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import requests
 
 
 class Course(models.Model):
@@ -37,3 +38,28 @@ class Task(models.Model):
 
     def __str__(self):
         return 'Task "{}"'.format(self.name)
+
+
+class Solution(models.Model):
+    task = models.ForeignKey('Task', on_delete=models.CASCADE)
+    date = models.DateTimeField()
+    url = models.TextField()
+
+    def __str__(self):
+        return 'Solution for "{}"'.format(self.task.name)
+
+    def validate_url(self):
+        r = requests.get(self.url)
+        if r.headers['server'] == 'GitHub.com':
+            return True
+        return False
+
+    def clean(self, *args, **kwargs):
+        if self.validate_url():
+            super(Solution, self).clean(*args, **kwargs)
+        else:
+            raise ValueError('This is not github repo')
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super(Solution, self).save(*args, **kwargs)
